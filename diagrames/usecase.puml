@@ -1,0 +1,55 @@
+@startuml loadmind
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Utilisateur" as user
+actor "Administrateur" as admin
+
+rectangle "Loadmind" {
+    
+    '--- Authentification ---
+    usecase "S'authentifier" as Auth
+    usecase "S'inscrire" as signup 
+    usecase "Se connecter" as login
+    usecase "Se déconnecter" as logout
+    
+    '--- Articles ---
+    usecase "Gérer ses articles" as article
+    usecase "recherche des articles" as search
+    usecase "Créer un article" as add_art
+    usecase "Modifier un article" as modify_art
+    usecase "Supprimer un article" as delete_art
+    
+    '--- Interactions ---
+    usecase "Interagir avec les articles" as action
+    usecase "Liker un article" as like 
+    usecase "Commenter un article" as comment
+    
+    '--- Admin ---
+    usecase "Modérer tous les articles" as g_art
+}
+user -- search 
+Auth <-- signup
+Auth <-- login
+Auth <.. logout : <<extend>>
+
+user -- article
+Auth <.. action :<<include>>
+user -- action
+Auth <.. article : <<include>>
+user -- Auth
+
+article <-- add_art 
+article <-- modify_art 
+article <-- delete_art 
+
+action <.. like : <<extend>> 
+action <.. comment : <<extend>>
+
+admin -- g_art
+Auth <.. g_art : <<include>>
+
+
+
+@enduml

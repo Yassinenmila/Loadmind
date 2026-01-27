@@ -1,0 +1,43 @@
+@startuml loadmind
+
+class user {
+    - id int
+    - name string
+    - email string
+    - password string
+    - localisation string
+    - roles string 
++ login()
++ logout()
++ singup()
+}
+
+class article {
+    - id int
+    - titre string
+    - contenu string 
+    - localisation string
+    - user_id string
+    - created_at string
++ add_article()
++ modify_article()
++ delet_article()
++ getAll_articles()
++ filter_article()    
+}
+
+class like {
+    - id_user int
+    - id_article int
+    - created_at string
+    + like()
+    + unlike()
+}
+class comment{
+    - id_user int
+    - id_article int
+    - comment string
+    - created_at string
+}
+
+@enduml
