@@ -34,4 +34,16 @@ class User extends Authenticatable {
     public function isAdmin(): bool {
         return $this->role === 'admin';
     }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(like::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(comment::class);
+    }
 }
